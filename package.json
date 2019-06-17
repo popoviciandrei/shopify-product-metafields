@@ -1,8 +1,12 @@
 {
   "name": "andana-shopify-product-attributes",
   "version": "1.0.0",
-  "description": "",
+  "description": "Shopify App to add metafields for products",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:popoviciandrei/shopify-product-metafields.git"
+  },
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
@@ -28,6 +32,7 @@
     "next": "^8.1.0",
     "react": "^16.8.6",
     "react-apollo": "^2.5.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "store-js": "^2.0.4"
   }
 }

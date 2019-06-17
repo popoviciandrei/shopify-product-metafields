@@ -1,10 +1,13 @@
 import { EmptyState, Page, Layout, ResourcePicker } from '@shopify/polaris';
 const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
+import store from 'store-js';
+import ResourceListWithProducts from '../components/ResourcesList';
 
 class Index extends React.Component {
     state = { open: false }
 
     render() {
+        const emptyState = !store.get('ids');
         return (
             <Page
                 primaryAction={{
@@ -18,29 +21,33 @@ class Index extends React.Component {
                     open={this.state.open}
                     onSelection={(resources) => this.handleSelection(resources)}
                     onCancel={() => this.setState({ open: false })}
+                    idsFromResources
                 />
-                <Layout>
-                    <EmptyState
-                        heading="Discount your product temporarily"
-                        action={{
-                            content: 'Select products',
-                            onAction: () => this.setState({ open: true })
-                        }}
-                        image={img}
-                    >
-                        <p>Select Products to change state temporarily.</p>
-                    </EmptyState>
-                </Layout>
+                {emptyState ? (
+                    <Layout>
+                        <EmptyState
+                            heading="Discount your product temporarily"
+                            action={{
+                                content: 'Select products',
+                                onAction: () => this.setState({ open: true })
+                            }}
+                            image={img}
+                        >
+                            <p>Select Products to change state temporarily.</p>
+                        </EmptyState>
+                    </Layout>
+                ) : (
+                        <ResourceListWithProducts />
+                    )}
             </Page>
         )
     }
     handleSelection = (resources) => {
         const idsFromResources = resources.selection.map((product) => {
-            console.log(product);
             return product.id;
         });
         this.setState({ open: false })
-        console.log(resources);
+        store.set('ids', idsFromResources);
     }
 }
 
