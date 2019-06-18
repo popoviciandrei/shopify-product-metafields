@@ -11,22 +11,9 @@ import {
     Toast
 } from '@shopify/polaris';
 import store from 'store-js';
-import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
+import UPDATE_PRICE from '../components/mutations/update_price';
 
-const UPDATE_PRICE = gql`
-  mutation productVariantUpdate($input: ProductVariantInput!) {
-    productVariantUpdate(input: $input) {
-      product {
-        title
-      }
-      productVariant {
-        id
-        price
-      }
-    }
-  }
-`;
 
 
 class EditProduct extends React.Component {
